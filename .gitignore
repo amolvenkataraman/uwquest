@@ -1,0 +1,10 @@
+.venv/
+__pycache__/
+*.egg-info/
+dist/
+.pytest_cache/
+.ruff_cache/
+cookies.json
+*.cookies.json
+*.pdf
+snapshot*.json
