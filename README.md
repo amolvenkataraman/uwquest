@@ -1,13 +1,22 @@
-# uwquest
+<!-- header:start -->
+<div align="center">
+
+<img alt="uwquest: UWaterloo Quest from your terminal: classes, grades and enrollment. Read-only." src=".github/assets/banner.svg" width="100%">
+
+![python: 3.11+](https://img.shields.io/badge/python-3.11%2B-0f6f68?labelColor=15181c&color=0f6f68)
+[![licence: MIT](https://img.shields.io/badge/licence-MIT-0f6f68?labelColor=15181c&color=0f6f68)](LICENSE)
+
+[Install](#install) · [Usage](#usage) · [Terminal UI](#terminal-ui) · [Status](#status)
+
+</div>
+
+<a href="https://haiscale.amolven.com/A1/"><img alt="HAI Scale A1, Mostly automated. Most of the code was written by AI coding agents. I directed the design, reviewed the changes and tested it on my own account. Unofficial and not affiliated with the University of Waterloo. Provided as is, with no warranty. Read DISCLAIMER.md before use." src=".github/assets/hai.svg" width="100%"></a>
+
+<sub>Use it only on your own account, at a modest request rate, and check UW's acceptable-use policy for automated access. Full terms: [DISCLAIMER.md](DISCLAIMER.md)</sub>
+<!-- header:end -->
 
 A read-first command-line tool and Python client for **UWaterloo Quest**
 (the university's PeopleSoft student self-service system).
-
-> [!WARNING]
-> **Provided AS IS, with no warranty and no liability. Written with AI assistance.**
-> Unofficial and not affiliated with the University of Waterloo. Use only on your
-> own account, at a modest request rate, and check UW's acceptable-use policy for
-> automated access. Read [DISCLAIMER.md](DISCLAIMER.md) before use.
 
 It logs in with a browser cookie session (Quest uses SSO + Duo, which you do once
 in your browser) and reads your own records into plain data — no enrolling, no
