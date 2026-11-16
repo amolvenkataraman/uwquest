@@ -1,18 +1,18 @@
 <!-- header:start -->
 <div align="center">
 
-<img alt="uwquest: UWaterloo Quest from your terminal: classes, grades and enrollment. Read-only." src=".github/assets/banner.svg" width="100%">
+<img alt="uwquest: UWaterloo Quest from your terminal: classes, grades and enrollment. Read-only." src="https://raw.githubusercontent.com/amolvenkataraman/uwquest/main/.github/assets/banner.svg" width="100%">
 
 ![python: 3.11+](https://img.shields.io/badge/python-3.11%2B-0f6f68?labelColor=15181c&color=0f6f68)
-[![licence: MIT](https://img.shields.io/badge/licence-MIT-0f6f68?labelColor=15181c&color=0f6f68)](LICENSE)
+[![licence: MIT](https://img.shields.io/badge/licence-MIT-0f6f68?labelColor=15181c&color=0f6f68)](https://github.com/amolvenkataraman/uwquest/blob/main/LICENSE)
 
 [Install](#install) · [Usage](#usage) · [Terminal UI](#terminal-ui) · [How it works](#how-it-works) · [Status](#status)
 
 </div>
 
-<a href="https://haiscale.amolven.com/A1/"><img alt="HAI Scale A1, Mostly automated. Most of the code was written by AI coding agents. I directed the design, reviewed the changes and tested it on my own account. Unofficial and not affiliated with the University of Waterloo. Provided as is, with no warranty. Read DISCLAIMER.md before use." src=".github/assets/hai.svg" width="100%"></a>
+<a href="https://haiscale.amolven.com/A1/"><img alt="HAI Scale A1, Mostly automated. Most of the code was written by AI coding agents. I directed the design, reviewed the changes and tested it on my own account. Unofficial and not affiliated with the University of Waterloo. Provided as is, with no warranty. Read DISCLAIMER.md before use." src="https://raw.githubusercontent.com/amolvenkataraman/uwquest/main/.github/assets/hai.svg" width="100%"></a>
 
-<sub>Use it only on your own account, at a modest request rate, and check UW's acceptable-use policy for automated access. Full terms: [DISCLAIMER.md](DISCLAIMER.md)</sub>
+<sub>Use it only on your own account, at a modest request rate, and check UW's acceptable-use policy for automated access. Full terms: [DISCLAIMER.md](https://github.com/amolvenkataraman/uwquest/blob/main/DISCLAIMER.md)</sub>
 <!-- header:end -->
 
 ![Terminal recording: quest status, quest schedule and quest classes CS 341 --seats, then the TUI's Dashboard, Schedule, Grades, Account and Classes tabs](https://raw.githubusercontent.com/amolvenkataraman/uwquest/main/docs/media/demo.gif)
