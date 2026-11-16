@@ -28,6 +28,17 @@ payments, and Personal-Information pages are blocked in code.
 
 ## Install
 
+From PyPI (the package is `uwquest`; the command it installs is `quest`):
+
+```bash
+pipx install uwquest              # or: uv tool install uwquest
+pipx install 'uwquest[browser]'   # also read cookies live from the browser
+pipx install 'uwquest[browser,tui]'  # plus the terminal UI
+pip install uwquest               # as a library in an existing environment
+```
+
+From source:
+
 ```bash
 git clone https://github.com/amolvenkataraman/uwquest && cd uwquest
 uv tool install .                 # base (file-based cookies)
