@@ -6,7 +6,7 @@
 ![python: 3.11+](https://img.shields.io/badge/python-3.11%2B-0f6f68?labelColor=15181c&color=0f6f68)
 [![licence: MIT](https://img.shields.io/badge/licence-MIT-0f6f68?labelColor=15181c&color=0f6f68)](LICENSE)
 
-[Install](#install) · [Usage](#usage) · [Terminal UI](#terminal-ui) · [Status](#status)
+[Install](#install) · [Usage](#usage) · [Terminal UI](#terminal-ui) · [How it works](#how-it-works) · [Status](#status)
 
 </div>
 
