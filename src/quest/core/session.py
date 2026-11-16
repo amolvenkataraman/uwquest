@@ -36,7 +36,9 @@ QUEST_DOMAIN = "pecs.uwaterloo.ca"
 
 # Personal-information components are refused here so nothing downstream can reach
 # them, however it is called.
-_BLOCKED = re.compile(r"PERSONAL|ADDR|PHONE|EMAIL|EMERG|DISABILITY|ETHNIC|GENDER|DEMOGRAPH", re.I)
+_BLOCKED = re.compile(
+    r"PERSONAL|PERS_|ADDR|PHONE|EMAIL|EMERG|DISABILITY|ETHNIC|GENDER|DEMOGRAPH", re.I
+)
 
 # The only ICActions this package sends, per component. Each one reads a page:
 # a term-picker GO, a class search, a section drill-in and back, a transcript

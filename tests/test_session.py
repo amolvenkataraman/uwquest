@@ -101,3 +101,9 @@ def test_allowlist_covers_only_reader_components():
         course_availability.COMPONENT,
         transcript.COMPONENT,
     }
+
+
+def test_pers_components_are_blocked_too():
+    from quest.core.session import _BLOCKED
+    assert _BLOCKED.search("CC_PORTFOLIO.SS_CC_PERS_DATA_SUMM.GBL")
+    assert not _BLOCKED.search("UW_SS_MENU.UW_SSR_SSENRL_GRDE.GBL")
