@@ -62,7 +62,7 @@ quest classes MATH 135            # course availability (status per section, no 
 quest classes CS 486 --seats      # also fetch seat counts (slower)
 quest classes PMATH --open-only   # whole subject, open sections only
 quest transcript -o transcript.pdf  # download the unofficial transcript PDF
-quest --json schedule             # machine-readable, on any command
+quest schedule --json             # raw JSON on any command (--json also works before it)
 quest tui                         # interactive terminal UI (needs the 'tui' extra)
 ```
 
