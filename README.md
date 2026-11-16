@@ -15,9 +15,9 @@
 <sub>Use it only on your own account, at a modest request rate, and check UW's acceptable-use policy for automated access. Full terms: [DISCLAIMER.md](DISCLAIMER.md)</sub>
 <!-- header:end -->
 
-![Terminal recording: quest account, quest grades and quest enrollment-dates, then the TUI's Dashboard, Schedule, Grades, Account and Classes tabs](docs/media/demo.gif)
+![Terminal recording: quest status, quest schedule and quest classes CS 341 --seats, then the TUI's Dashboard, Schedule, Grades, Account and Classes tabs](https://raw.githubusercontent.com/amolvenkataraman/uwquest/main/docs/media/demo.gif)
 
-<sub>The recording uses synthetic data from `scripts/demo.py`; no real student record is shown.</sub>
+<sub>The recording uses synthetic data from [`scripts/demo.py`](https://github.com/amolvenkataraman/uwquest/blob/main/scripts/demo.py); no real student record is shown.</sub>
 
 A read-first command-line tool and Python client for **UWaterloo Quest**
 (the university's PeopleSoft student self-service system).
@@ -146,7 +146,7 @@ uv venv .venv && uv pip install --python .venv/bin/python -e '.[dev]'
 
 ## License
 
-MIT © 2026 Amol Venkataraman. Provided WITHOUT ANY WARRANTY — see [LICENSE](LICENSE)
-and [DISCLAIMER.md](DISCLAIMER.md). Not affiliated with or endorsed by the
+MIT © 2026 Amol Venkataraman. Provided WITHOUT ANY WARRANTY — see [LICENSE](https://github.com/amolvenkataraman/uwquest/blob/main/LICENSE)
+and [DISCLAIMER.md](https://github.com/amolvenkataraman/uwquest/blob/main/DISCLAIMER.md). Not affiliated with or endorsed by the
 University of Waterloo or Oracle. "Quest" and "PeopleSoft" are used only to
 describe compatibility.
