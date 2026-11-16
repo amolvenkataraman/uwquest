@@ -107,17 +107,26 @@ Some examples:
 - Transcript: `report()` selects the report type, presses View, follows the
   `/view/` link in the response and checks that the result starts with `%PDF`.
 
-**Read-only.** The session exposes only `get`, `action` and `report`, and the
-readers send only the actions listed above: term-picker GO, class search, section
-drill-in and back, and transcript View. Nothing in the package touches the
-shopping cart, enrollment, payments or any form that saves data. There is no
-separate allowlist of `ICAction` names; read-only comes from which readers exist.
+**Read-only allowlist.** `action()` POSTs only the `ICAction`s listed in
+`READ_ONLY_ACTIONS` (in `core/session.py`), and each one is tied to its component:
+
+| Component | Allowed actions |
+| --- | --- |
+| `UW_SS_MENU.UW_SSR_SSENRL_GRDE.GBL` (grades) | the term picker's `…PB_GO` button |
+| `UW_CEM.UW_CLASS_SRCH.GBL` (class search) | `CLASS_SRCH_WRK2_SSR_PB_CLASS_SRCH`, `CLASS_SRCH_WRK2_SSR_PB_BACK`, `MTG_CLASS_NBR$<n>` |
+| `SA_LEARNER_SERVICES.SSS_TSRQST_UNOFF.GBL` (transcript) | `DERIVED_SSTSRPT_TSCRPT_TYPE3`, `GO1` |
+
+Any other action, or any action on another component, raises `BlockedAction`
+before a request is sent. `report()` checks its whole sequence before it starts,
+and `get()` refuses a query string that carries an `ICAction`. Nothing in the
+package touches the shopping cart, enrollment, payments or any form that saves
+data.
 
 **Personal-Information blocklist.** Before any request, `get` and `action` check
 the component name against
 `PERSONAL|ADDR|PHONE|EMAIL|EMERG|DISABILITY|ETHNIC|GENDER|DEMOGRAPH`
 (case-insensitive). A match raises `BlockedComponent` and no request is sent.
-`report()` goes through the same check, because it calls `get` and `action`.
+`report()` runs the same check before it starts.
 
 ## Status
 

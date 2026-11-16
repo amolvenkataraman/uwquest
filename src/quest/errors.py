@@ -27,6 +27,10 @@ class BlockedComponent(QuestError):
     """A component on the personal-information blocklist was requested."""
 
 
+class BlockedAction(QuestError):
+    """An ICAction outside the read-only allowlist was requested."""
+
+
 class ParseError(QuestError):
     """A page loaded but did not have the structure the parser expected."""
 

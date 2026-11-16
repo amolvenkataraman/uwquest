@@ -4,8 +4,9 @@
 
 A `QuestSession` loads a cookie session (from a file, or straight from the
 browser) and exposes `get`, `action` and `report`. It carries the hidden
-`ICStateNum`/`ICSID` form state per component, detects the login redirect, and
-refuses any Personal-Information component outright.
+`ICStateNum`/`ICSID` form state per component, detects the login redirect,
+refuses any Personal-Information component outright, and only POSTs the
+ICActions on a read-only allowlist.
 """
 from __future__ import annotations
 
@@ -17,7 +18,13 @@ from pathlib import Path
 
 import requests
 
-from ..errors import BlockedComponent, QuestError, ReportError, SessionExpired
+from ..errors import (
+    BlockedAction,
+    BlockedComponent,
+    QuestError,
+    ReportError,
+    SessionExpired,
+)
 
 DEFAULT_BASE = "https://quest.pecs.uwaterloo.ca"
 SITE_PATH = "/psc/SS/ACADEMIC/SA"
@@ -30,6 +37,21 @@ QUEST_DOMAIN = "pecs.uwaterloo.ca"
 # Personal-information components are refused here so nothing downstream can reach
 # them, however it is called.
 _BLOCKED = re.compile(r"PERSONAL|ADDR|PHONE|EMAIL|EMERG|DISABILITY|ETHNIC|GENDER|DEMOGRAPH", re.I)
+
+# The only ICActions this package sends, per component. Each one reads a page:
+# a term-picker GO, a class search, a section drill-in and back, a transcript
+# type select and View. Anything else (enrollment, cart, payments, saves) is
+# refused before a request is made.
+READ_ONLY_ACTIONS: dict[str, re.Pattern[str]] = {
+    # grades: the term picker's continue button
+    "UW_SS_MENU.UW_SSR_SSENRL_GRDE.GBL": re.compile(r"[A-Z0-9_]*PB_GO[A-Z0-9_]*"),
+    # class search: search, open a section for seat counts, go back
+    "UW_CEM.UW_CLASS_SRCH.GBL": re.compile(
+        r"CLASS_SRCH_WRK2_SSR_PB_CLASS_SRCH|CLASS_SRCH_WRK2_SSR_PB_BACK|MTG_CLASS_NBR\$\d+"
+    ),
+    # unofficial transcript: pick the report type, then View
+    "SA_LEARNER_SERVICES.SSS_TSRQST_UNOFF.GBL": re.compile(r"DERIVED_SSTSRPT_TSCRPT_TYPE3|GO1"),
+}
 
 _HIDDEN = re.compile(r"<input type='hidden' name='([^']+)' id='[^']*' value='([^']*)'")
 _LOGIN_MARKERS = ('name="userid"', "name='userid'", 'name="pwd"', "PT_LOGIN", "PeopleSoft Sign")
@@ -160,10 +182,21 @@ class QuestSession:
                 f"{component} is a Personal-Information component and is blocked."
             )
 
+    @staticmethod
+    def _guard_action(component: str, icaction: str) -> None:
+        allowed = READ_ONLY_ACTIONS.get(component)
+        if allowed is None or not allowed.fullmatch(icaction):
+            raise BlockedAction(
+                f"ICAction {icaction!r} on {component} is not on the read-only "
+                "allowlist; nothing was sent."
+            )
+
     # -- public requests ----------------------------------------------------
     def get(self, component: str, query: str = "") -> str:
         """GET a component page; refresh its form state; return HTML."""
         self._guard(component)
+        if "icaction" in query.lower():
+            raise BlockedAction("an ICAction in a GET query is not allowed; use action()")
         with self._lock:
             self._throttle()
             url = self._component_url(component) + (f"?{query}" if query else "")
@@ -177,8 +210,9 @@ class QuestSession:
             return resp.text
 
     def action(self, component: str, icaction: str, fields: dict | None = None) -> str:
-        """POST an ICAction against the component, carrying its stored form state."""
+        """POST an allowlisted ICAction against the component, with its stored form state."""
         self._guard(component)
+        self._guard_action(component, icaction)
         with self._lock:
             state = self._state.get(component)
             if state is None:
@@ -203,6 +237,9 @@ class QuestSession:
         self, component: str, setup: list[tuple[str, dict]], final: tuple[str, dict]
     ) -> bytes:
         """Run a report-generation sequence and download the resulting PDF bytes."""
+        self._guard(component)
+        for icaction, _ in [*setup, final]:  # refuse the whole sequence up front
+            self._guard_action(component, icaction)
         with self._lock:
             self.get(component)
             for icaction, fields in setup:

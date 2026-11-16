@@ -15,12 +15,16 @@ from .core.session import (
     QuestSession,
 )
 from .errors import (
+    BlockedAction,
+    BlockedComponent,
     NotAuthorized,
     QuestError,
     SessionExpired,
 )
 
 __all__ = [
+    "BlockedAction",
+    "BlockedComponent",
     "BrowserCookieSource",
     "FileCookieSource",
     "NotAuthorized",
